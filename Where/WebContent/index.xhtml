@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ace="http://www.icefaces.org/icefaces/components"
+	template="/WEB-INF/templates/template.xhtml">
+	<ui:param name="title" value="WhereWeAre" />
+	<ui:param name="companyName" value="Team Service Engineering" />
+	<ui:define name="menuItems">
+		<ace:menuItem value="Home" url="#" icon="ui-icon ui-icon-home"
+			styleClass="menuBarItem" />
+		<ace:menuItem value="Offices" url="#" styleClass="menuBarItem" />
+		<ace:menuItem value="Employees" url="#" styleClass="menuBarItem" />
+		<ace:menuItem value="Sales" url="#" styleClass="menuBarItem" />
+		<ace:menuItem value="Payroll" url="#" styleClass="menuBarItem" />
+	</ui:define>
+	
+</ui:composition>

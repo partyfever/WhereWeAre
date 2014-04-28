@@ -1,0 +1,57 @@
+<!-- Contains the Menu of the single page app -->
+
+<div class="container clearfix" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html">
+	<a href="."> <img src="./resources/images/logo.png"
+		alt="Explorable Theme" id="logo" />
+	</a>
+
+	<div id="top-navigation">
+		<nav>
+			<h:form>
+				<h:panelGroup rendered="#{!securityController.loggedIn}">
+					<ul id="menu-pages" class="nav sf-js-enabled">
+						<li id="menu-item-map"
+							class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-has-children menu-item-128"><a
+							href="#" class="sf-with-ul"><span class="sf-sub-indicator">
+									»</span></a></li>
+						<li id="menu-item-login"
+							class="menu-item menu-item-type-taxonomy menu-item-object-category">
+							<h:commandLink styleClass="sf-with-ul"
+								onclick="loginDialog.show();">Login<span
+									class="sf-sub-indicator"> »</span>
+							</h:commandLink>
+						</li>
+						<li id="menu-item-register"
+							class="menu-item menu-item-type-taxonomy menu-item-object-category">
+							<h:commandLink styleClass="sf-with-ul"
+								onclick="registerDialog.show();">Registrieren<span
+									class="sf-sub-indicator"> »</span>
+							</h:commandLink>
+						</li>
+
+					</ul>
+				</h:panelGroup>
+
+				<h:panelGroup rendered="#{securityController.loggedIn}">
+					<ul id="menu-pages" class="nav sf-js-enabled">
+						<li id="menu-item-logout"
+							class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-has-children menu-item-128"><a
+							href="#" class="sf-with-ul">Karte<span
+								class="sf-sub-indicator"> »</span></a></li>
+						<li id="menu-item-logout"
+							class="menu-item menu-item-type-taxonomy menu-item-object-category">
+							<h:commandLink styleClass="sf-with-ul"
+								actionListener="#{mapViewController.logout}">Logout<span
+									class="sf-sub-indicator"> »</span>
+							</h:commandLink>
+						</li>
+					</ul>
+				</h:panelGroup>
+			</h:form>
+		</nav>
+	</div>
+	<!-- #top-navigation -->
+</div>
+<!-- .container -->
