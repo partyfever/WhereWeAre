@@ -1,0 +1,25 @@
+<ace:dialog id="loginDialog" header="Login" widgetVar="loginDialog"
+	closable="false" modal="true" draggable="false" showEffect="clip"
+	hideEffect="fade" width="400" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ace="http://www.icefaces.org/icefaces/components"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	xmlns:f="http://java.sun.com/jsf/core">
+	<h:form id="loginForm">
+		<h:messages></h:messages>
+		<h:panelGrid columns="2" width="100%">
+			<h:outputLabel id="userNameLabel" for="userNameInputField"
+				value="Benutzername:" />
+			<ice:inputText id="userNameInputField"
+				value="#{loginController.userName}" />
+			<h:outputLabel id="pwdLabel" for="pwdInputField" value="Passwort:" />
+			<ice:inputSecret id="lastNameInputField"
+				value="#{loginController.password}">
+			</ice:inputSecret>
+		</h:panelGrid>
+		<h:panelGrid width="100%" style="text-align: center;">
+			<h:commandButton id="loginButton" value="Anmelden"
+				actionListener="#{loginController.login}" />
+		</h:panelGrid>
+	</h:form>
+</ace:dialog>

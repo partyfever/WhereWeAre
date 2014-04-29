@@ -1,0 +1,36 @@
+<ace:dialog id="registerDialog" header="Registrieren"
+	widgetVar="registerDialog" closable="false" modal="true"
+	draggable="false" showEffect="clip" hideEffect="fade" width="400"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ace="http://www.icefaces.org/icefaces/components"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	xmlns:f="http://java.sun.com/jsf/core">
+	<h:form id="registerForm">
+		<h:messages></h:messages>
+		<h:panelGrid columns="2" width="100%">
+			<h:outputLabel id="userNameLabel" for="userNameInputField"
+				value="Benutzername:" />
+			<ice:inputText id="userNameInputField" required="true"
+				value="#{registerController.userName}" />
+			<h:outputLabel id="pwdLabel" for="pwdInputField" value="Passwort:" />
+			<ice:inputSecret id="pwdInputField" required="true"
+				value="#{registerController.password}"></ice:inputSecret>
+			<h:outputLabel id="pwdRepeatLabel" for="pwdRepeatInputField"
+				value="Passwort wiederholen:" />
+			<ice:inputSecret id="pwdRepeatInputField" required="true"
+				value="#{registerController.password2}"></ice:inputSecret>
+			<h:outputLabel id="groupLabel" for="groupSelect" value="Gruppe: "></h:outputLabel>
+			<ice:selectOneMenu id="groupSelect"
+				value="#{registerController.selectedItem}">
+				<f:selectItems value="#{registerController.groups}" var="group"
+					itemLabel="#{group.name}" itemValue="#{group.name}"></f:selectItems>
+			</ice:selectOneMenu>
+		</h:panelGrid>
+		<h:panelGrid width="100%" style="text-align: center;">
+			<h:commandButton id="loginButton" value="Registrieren"
+				actionListener="#{registerController.register}">
+			</h:commandButton>
+		</h:panelGrid>
+	</h:form>
+</ace:dialog>

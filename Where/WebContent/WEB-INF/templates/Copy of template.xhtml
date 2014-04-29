@@ -1,0 +1,184 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	xmlns:ace="http://www.icefaces.org/icefaces/components"
+	xmlns:m="http://code.google.com/p/gmaps4jsf/"
+	xmlns:icecore="http://www.icefaces.org/icefaces/core"
+	xmlns:mobi="http://www.icesoft.com/icefaces/mobile/component">
+<h:head>
+	<title>#{title}</title>
+	<link rel="stylesheet" type="text/css" href="./resources/css/style.css" />
+	<script type="text/javascript"
+		src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
+	<script src="http://google-maps-utility-library-v3.googlecode.com/svn/tags/markerwithlabel/1.1.9/markerwithlabel/src/markerwithlabel.js"></script>
+	<script src=" http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer.js"></script>
+	<h:outputScript library="js" name="mapmarker.js" target="head"/>
+	<h:outputScript library="js" name="geolocation.js" target="head"/>
+</h:head>
+
+<h:body styleClass="home blog et_frontend_customizer ie et_includes_sidebar et_map_full_screen">
+
+	<icecore:config render="true" />
+	
+	<div id="main-header">
+		<ui:include src="/WEB-INF/includes/menu.xhtml" />
+	</div>
+	<!-- #main-header -->
+	
+	<h:panelGroup id="mapArea">
+		<h:form id="et_main_map"
+			style="position: relative; background-color: rgb(229, 227, 223); overflow: hidden; -webkit-transform: translateZ(0px);">
+			<m:map jsVariable="userMap" id="gmap" styleClass="gm-style" zoom="1"
+				width="100%" height="100%" latitude="48.32866470670328"
+				longitude="14.295013928832729" partiallyTriggered="true"
+				enableScrollWheelZoom="true" actionListener="#{map.handleMapClick}">
+			</m:map>
+		</h:form>
+	</h:panelGroup>
+	<!-- #mapArea -->
+	
+	<div id="filter-bar">
+		<div style="margin-left:20px;">
+			<ice:form  id="geolocationForm" partialSubmit="true">
+				<mobi:geolocation 
+					latitude="#{mapViewController.userLat}"
+					longitude="#{mapViewController.userLng}" 
+					timeout="30" enableHighPrecision="asNeeded"
+					continuousUpdates="true">
+				</mobi:geolocation>
+				<h:commandLink actionListener="#{mapViewController.locationChanged}" id="gewinnspielsucheFormButton">
+				</h:commandLink>
+				 <icecore:singleSubmit/>
+			</ice:form>
+			
+			
+			<h:form id="settingForm">
+				<h:panelGroup styleClass="clearfix" rendered="#{!empty mapViewController.curUser}">
+					<h:panelGroup rendered="#{empty mapViewController.userLat}">Warte auf aktuelle Position! Zugriff erlaubt?</h:panelGroup>
+					<h:panelGroup rendered="#{!empty mapViewController.userLat}">Letze Position: (#{mapViewController.userLat}/#{mapViewController.userLng})</h:panelGroup>
+				</h:panelGroup>
+				
+				<h:panelGroup style="width:100%;">
+					<h:outputLabel  style="float:left;" value="Map Update Interval (#{mapViewController.mapUpdateInterval} ms): "></h:outputLabel>
+					<ace:sliderEntry style ="float:left;" id="mapUpdateSlider" axis="x" clickableRail="false" partialSubmit="true"
+						length="100" min="1000" max="60000" stepPercent="5" valueChangeListener="#{mapViewController.mapUpdateIntervalChanged}" value="#{mapViewController.mapUpdateInterval}">
+						<ace:ajax event="slideEnd"  render="settingForm" />
+					</ace:sliderEntry>
+					<h:panelGroup rendered="#{!empty mapViewController.curUser}">
+						<h:outputLabel style="float:left;"
+							value="Location Update Interval (#{mapViewController.locationUpdateInterval} ms): "></h:outputLabel>
+						<ace:sliderEntry style="float:left;" id="locationUpdateSlider" axis="x"
+							clickableRail="false" partialSubmit="true" length="100" min="1000"
+							max="60000" stepPercent="5"
+							valueChangeListener="#{mapViewController.locationUpdateIntervalChanged}"
+							value="#{mapViewController.locationUpdateInterval}">
+							<ace:ajax event="slideEnd" render="settingForm" />
+						</ace:sliderEntry>
+					</h:panelGroup>
+	
+					<h:commandLink style="float:left;" value="asdf #{securityController.curUser.name}"
+						actionListener="#{mapViewController.addMarker}">
+						<f:viewParam name="dummy"/>
+					</h:commandLink>
+				</h:panelGroup>
+			</h:form>
+		</div>
+		<!-- .container -->
+	</div>
+	
+	<f:event type="preRenderView" listener="#{mapViewController.preRenderView}" />
+	
+	<h:panelGroup id="et-list-view" 
+		styleClass="et-normal-listings et-listview-open">
+		<h:panelGroup id="et-listings" style="">
+			<h:panelGroup scrollHeight="599px" styleClass="viewport">
+				<h:panelGroup scrollHeight="599px" class="overview"
+					style="top: 0px;">
+					<ul style="">
+						<ui:repeat var="group" value="#{mapViewController.groups}">
+							<li class=" clearfix">
+								<h1>Gruppe #{group.name}</h1>
+							</li>
+							<ui:repeat var="user" value="#{group.users}">
+								<li class="clearfix">
+									<div class="listing-image"
+										style="background-color: #{group.color}; width: 60px; height: 60px;">
+									</div>
+									<div class="listing-text" id="list-user-#{user.id}">
+										<h3>#{user.name}</h3>
+										<p style="font-size:10px;">#{user.lat}/#{user.lng}</p>
+										<p></p>
+									</div>
+								</li>
+							</ui:repeat>
+						</ui:repeat>
+					</ul>
+				</h:panelGroup>
+			</h:panelGroup>
+		</h:panelGroup>
+
+		<a href="http://elegantthemes.com/preview/Explorable/#"
+			class="et-date"><span>Toggle</span> List View</a>
+	</h:panelGroup>
+
+
+	<ace:dialog id="loginDialog" header="Login" widgetVar="loginDialog"
+		closable="false" modal="true" draggable="false" showEffect="clip"
+		hideEffect="fade" width="400">
+		<h:form id="loginForm">
+			<h:messages></h:messages>
+			<h:panelGrid columns="2" width="100%">
+				<h:outputLabel id="userNameLabel" for="userNameInputField"
+					value="Benutzername:" />
+				<ice:inputText id="userNameInputField"
+					value="#{loginController.userName}" />
+				<h:outputLabel id="pwdLabel" for="pwdInputField" value="Passwort:" />
+				<ice:inputSecret id="lastNameInputField"
+					value="#{loginController.password}">
+				</ice:inputSecret>
+			</h:panelGrid>
+			<h:panelGrid width="100%" style="text-align: center;">
+				<h:commandButton id="loginButton" value="Anmelden"
+					actionListener="#{loginController.login}" />
+			</h:panelGrid>
+		</h:form>
+	</ace:dialog>
+
+	<ace:dialog id="registerDialog" header="Registrieren"
+		widgetVar="registerDialog" closable="false" modal="true"
+		draggable="false" showEffect="clip" hideEffect="fade" width="400">
+		<h:form id="registerForm">
+			<h:messages></h:messages>
+			<h:panelGrid columns="2" width="100%">
+				<h:outputLabel id="userNameLabel" for="userNameInputField"
+					value="Benutzername:" />
+				<ice:inputText id="userNameInputField" required="true"
+					value="#{registerController.userName}" />
+				<h:outputLabel id="pwdLabel" for="pwdInputField" value="Passwort:" />
+				<ice:inputSecret id="pwdInputField" required="true"
+					value="#{registerController.password}"></ice:inputSecret>
+				<h:outputLabel id="pwdRepeatLabel" for="pwdRepeatInputField"
+					value="Passwort wiederholen:" />
+				<ice:inputSecret id="pwdRepeatInputField" required="true"
+					value="#{registerController.password2}"></ice:inputSecret>
+				<h:outputLabel id="groupLabel" for="groupSelect" value="Gruppe: "></h:outputLabel>
+				<ice:selectOneMenu id="groupSelect"
+					value="#{registerController.selectedItem}">
+					<f:selectItems value="#{registerController.groups}" var="group"
+						itemLabel="#{group.name}" itemValue="#{group.name}"></f:selectItems>
+				</ice:selectOneMenu>
+			</h:panelGrid>
+			<h:panelGrid width="100%" style="text-align: center;">
+				<h:commandButton id="loginButton" value="Registrieren"
+					actionListener="#{registerController.register}">
+				</h:commandButton>
+			</h:panelGrid>
+		</h:form>
+	</ace:dialog>
+</h:body>
+</html>
