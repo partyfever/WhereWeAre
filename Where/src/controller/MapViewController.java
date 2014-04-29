@@ -51,7 +51,7 @@ public class MapViewController implements Serializable {
 	private UpdateViewThread updateThread;
 	// true, if updateThread should be stopped
 	private boolean stopUpateThread = false;
-	// Protable updateRenderer
+	// Portable updateRenderer
 	private PortableRenderer m_renderer;
 	// Session id
 	private String m_sessionId;
@@ -96,7 +96,6 @@ public class MapViewController implements Serializable {
 	 * @param e	Event
 	 */
 	public void mapUpdateIntervalChanged(ValueChangeEvent e) {
-		System.out.println("value changed" + this.mapUpdateInterval);
 		this.mapUpdateInterval = (int) e.getNewValue();
 		this.updateThread.interrupt();
 	}
@@ -217,7 +216,7 @@ public class MapViewController implements Serializable {
 			{
 				while (!stopUpateThread) {
 					try {
-						System.out.println("before sleepd");
+					
 						// Thleap mapUdateInterval milliseconds
 						Thread.sleep(mapUpdateInterval);
 						groups = null;
@@ -225,7 +224,7 @@ public class MapViewController implements Serializable {
 						// Rerender
 						m_renderer.render(m_sessionId);
 					} catch (InterruptedException e) {
-						System.out.println("interrupted");
+						
 					}
 				}
 			}
@@ -253,11 +252,11 @@ public class MapViewController implements Serializable {
 	}
 
 	public void posValueChanged(ValueChangeEvent e) {
-		System.out.println("pos changed");
+		
 	}
 
 	public void posChanged(ActionEvent e) {
-		System.out.println("pos changed");
+		
 	}
 
 	public Double getUserLng() {

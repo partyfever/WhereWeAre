@@ -23,7 +23,7 @@ public class LoginController implements Serializable {
 	private String password;
 
 	/**
-	 * Action Method colled after Login Button pressed in a Login Dialog
+	 * Action Method called after Login Button pressed in a Login Dialog
 	 * 
 	 * @return
 	 */
