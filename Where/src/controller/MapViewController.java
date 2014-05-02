@@ -72,6 +72,7 @@ public class MapViewController implements Serializable {
 		// to the session id --> If PushRenderer.render(m_sessionId) is called,
 		// view gets rerendered
 		PushRenderer.addCurrentSession(m_sessionId);
+
 		m_renderer = PushRenderer.getPortableRenderer();
 		updateThread = new UpdateViewThread();
 		updateThread.start();

@@ -34,7 +34,7 @@ var MapMarkerModul = (function () {
 		       labelClass: "labels", // the CSS class for the label
 		       labelStyle: {opacity: 0.75}
 		     });
-		
+		//Register listener from list-view
 		google.maps.event.addDomListener(
                 document.getElementById("list-user-"+id),
                 "click", 

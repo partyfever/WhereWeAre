@@ -23,7 +23,7 @@ var GeoTimerModul = (function() {
 	// command link geolocationForm:gewinnspielsucheFormButton
 	geoTimer.updateLocation = function updateLocation() {
 		iceSubmitPartial(document.getElementById("geolocationForm"), document
-				.getElementById("geolocationForm:gewinnspielsucheFormButton"));
+				.getElementById("geolocationForm:locationFormButton"));
 	};
 	return geoTimer;
 }());
