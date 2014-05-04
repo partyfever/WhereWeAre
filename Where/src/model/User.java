@@ -9,7 +9,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
+/**
+ * User POJO
+ */
 @Entity
 @Table
 public class User implements Serializable {

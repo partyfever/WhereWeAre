@@ -10,6 +10,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+/**
+ * Group POJO
+ */
 @Entity
 @Table(name="grp")
 public class Group implements Serializable{

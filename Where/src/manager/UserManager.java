@@ -4,7 +4,7 @@ import model.User;
 
 /**
  * UserManager for accessing Users 
- * @author Sebastian
+
  *
  */
 public interface UserManager {
