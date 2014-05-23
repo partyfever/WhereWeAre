@@ -5,6 +5,8 @@ import java.util.List;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 
+import org.hibernate.ObjectNotFoundException;
+
 import model.Group;
 import dao.GroupDAO;
 
@@ -34,7 +36,14 @@ public class GroupManagerImpl implements GroupManager {
 
 	@Override
 	public Group getGroupById(Integer id) {
-		return dao.find(id);
+		Group group=null;
+		try{
+			group= this.dao.find(id);
+		}
+		catch(ObjectNotFoundException e){
+			
+		}
+		return group;
 	}
 
 	

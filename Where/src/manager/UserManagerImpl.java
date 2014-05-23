@@ -6,6 +6,9 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 import model.User;
+
+import org.hibernate.ObjectNotFoundException;
+
 import dao.UserDAO;
 
 @ManagedBean(name = "userManager")
@@ -49,7 +52,14 @@ public class UserManagerImpl implements UserManager {
 
 	@Override
 	public User find(Integer id) {
-	return this.userDAO.find(id);
+		try{
+			return this.userDAO.find(id);
+		}
+		catch(ObjectNotFoundException e){
+			
+		}
+		return null;
+	
 	}
 
 }

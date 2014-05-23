@@ -88,7 +88,7 @@ public class UserResource {
 	public User getUser(@PathParam("id") Integer id) {
 		User user = this.userManager.find(id);
 		if (user == null) {
-			throw new WebApplicationException(404);
+			throw new JsonWebApplicationException(404,Error.RESSOURCE_NOT_FOUND);
 		}
 		return UriHelper.addUserLinks(uriInfo, user);
 	}
@@ -117,6 +117,7 @@ public class UserResource {
 				.getPassword()));
 		Group group=new Group();
 		group.setId(userEntry.getGroupId());
+		userEntry.setGroup(group);
 		this.userManager.addUser(userEntry);
 		return userEntry;
 	}
@@ -143,7 +144,7 @@ public class UserResource {
 		}
 		User authUser = SecurityHelper.getUser();
 		if (authUser.getId() != id) {
-			throw new JsonWebApplicationException(404, Error.UNAUTHORIZED,
+			throw new JsonWebApplicationException(401, Error.UNAUTHORIZED,
 					"Cannot change location of different user.");
 		}
 		User dbUser = this.userManager.find(id);

@@ -53,6 +53,11 @@ public class UriHelper {
 		builder.path(GroupResource.class, "read");
 		group.getLinks().add(
 				new AtomLink("self", builder.build(group.getId()).toString()));
+		builder=uriInfo.getBaseUriBuilder();
+		builder=builder.path(GroupResource.class);
+		builder.path(GroupResource.class, "readUsers");
+		group.getLinks().add(
+				new AtomLink("users", builder.build(group.getId()).toString()));
 	
 		return group;
 	}

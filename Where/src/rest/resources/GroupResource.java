@@ -33,6 +33,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import rest.UriHelper;
+import rest.exceptions.Error;
 import rest.exceptions.JsonWebApplicationException;
 import eli.JsonViews;
 
@@ -70,6 +71,22 @@ public class GroupResource {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
+	@Path("{id}/users")
+	@JsonView({ JsonViews.User.class })
+	public List<User> readUsers(@PathParam("id") Integer id){
+		Group groupEntry = this.groupManager.getGroupById(id);
+		if (groupEntry == null) {
+			throw new JsonWebApplicationException(404,Error.RESSOURCE_NOT_FOUND);
+		}
+		List<User> users=groupEntry.getUsers();
+		for(User user:users){
+			UriHelper.addUserLinks(uriInfo, user);
+		}
+		return users;
+	}
+
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
 	@Path("{id}")
 	public String read(@PathParam("id") String path)
 			throws JsonGenerationException, JsonMappingException, IOException {
@@ -83,7 +100,7 @@ public class GroupResource {
 		if (id != null) {
 			Group groupEntry = this.groupManager.getGroupById(id);
 			if (groupEntry == null) {
-				throw new WebApplicationException(404);
+				throw new JsonWebApplicationException(404,Error.RESSOURCE_NOT_FOUND);
 			}
 			viewWriter = this.mapper.writerWithView(JsonViews.NoDetail.class);
 			UriHelper.addGroupLinks(uriInfo, groupEntry);

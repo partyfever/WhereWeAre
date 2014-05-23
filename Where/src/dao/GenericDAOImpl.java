@@ -52,7 +52,7 @@ public abstract class GenericDAOImpl<T, ID extends Serializable> implements
 
 	public T load(ID entity) {
 		Session hibernateSession = this.getSession();
-		return (T) hibernateSession.load(this.elementClass, entity);
+		return (T) hibernateSession.get(this.elementClass, entity);
 	}
 
 	public List<T> findMany(Query query) {

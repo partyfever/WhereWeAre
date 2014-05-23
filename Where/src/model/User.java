@@ -65,7 +65,6 @@ public class User implements Serializable, UserDetails {
 
 	@Transient
 	@JsonView({ JsonViews.User.class })
-	
 	private int groupId;
 
 	public User() {
@@ -128,11 +127,9 @@ public class User implements Serializable, UserDetails {
 		this.group = group;
 	}
 
-
 	public String getPassword() {
 		return password;
 	}
-
 
 	public void setPassword(String password) {
 		this.password = password;
@@ -204,7 +201,7 @@ public class User implements Serializable, UserDetails {
 
 		this.roles.add(role);
 	}
-	
+
 	public List<AtomLink> getLinks() {
 		return links;
 	}
