@@ -1,5 +1,8 @@
 package manager;
 
+import java.io.Serializable;
+import java.util.List;
+
 import model.User;
 
 /**
@@ -7,7 +10,7 @@ import model.User;
 
  *
  */
-public interface UserManager {
+public interface UserManager extends Serializable{
 	/**
 	 * Check if a user with the name userName exists
 	 * @param userName The name to check.
@@ -36,4 +39,6 @@ public interface UserManager {
 	 * @return Updated User Object
 	 */
 	public User updateUserLocation(User user, Double lat, Double lng);
+	public List<User> getUsers();
+	public User find(Integer id);
 }

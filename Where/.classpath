@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre7">
+	<classpathentry kind="src" output="target/classes" path="src">
 		<attributes>
-			<attribute name="owner.project.facets" value="java"/>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="con" path="org.icefaces.eclipse.library.oss.component.mobi/jst.icefaces">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
@@ -38,22 +37,8 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/antlr-2.7.6.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/antlr-2.7.7.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/aopalliance-1.0.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/c3p0-0.9.1.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-collections-3.1.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-email-1.2-javadoc.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-email-1.2-sources.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-email-1.2.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-fileupload-1.2.2.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-io-2.4.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-lang-2.4.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-lang3-3.1.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/dao-1.0.0.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/dao-hibernate-1.0.0.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/dom4j-1.6.1.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/gmaps4jsf-core-3.0.0.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/hibernate-jpa-2.0-api-1.0.1.Final.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/hibernate3.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/javassist-3.12.0.GA.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/javax.faces-2.1.21.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jstl-1.2.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jta-1.1.jar"/>
@@ -62,11 +47,18 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/mashups4jsf-core-1.0.0.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/mysql-connector-java-5.1.21-bin.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/persistence-api-1.0.2.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/search-1.0.0.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/search-hibernate-1.0.0.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/search-jpa-hibernate-1.0.0.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/slf4j-api-1.6.1.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/slf4j-log4j12-1.6.6.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/stax-api-1.0-2.jar"/>
-	<classpathentry kind="output" path="build/classes"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="output" path="target/classes"/>
 </classpath>

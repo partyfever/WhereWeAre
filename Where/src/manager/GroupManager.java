@@ -1,4 +1,5 @@
 package manager;
+import java.io.Serializable;
 import java.util.List;
 
 import model.Group;
@@ -6,7 +7,7 @@ import model.Group;
 /**
  * GroupManager for accessing groups
  */
-public interface GroupManager {
+public interface GroupManager extends Serializable{
 	/**
 	 * Get all Groups from the server 
 	 * @return all groups
@@ -23,4 +24,5 @@ public interface GroupManager {
 	 * @param group Group to create
 	 */
 	public void createGroup(Group group);
+	public Group getGroupById(Integer id);
 }
