@@ -12,9 +12,10 @@ import javax.servlet.ServletResponse;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.FlushMode;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.StaleObjectStateException;
-import org.hibernate.context.ManagedSessionContext;
+import org.hibernate.context.internal.ManagedSessionContext;
 
 
 /**
@@ -34,7 +35,7 @@ public class HibernateSessionRequestFilter implements Filter {
 
 		try {
 			log.debug("Starting a database transaction");
-			 org.hibernate.classic.Session session = HibernateUtil.getSessionFactory().openSession();
+			Session session = HibernateUtil.getSessionFactory().openSession();
 		      session.setFlushMode(FlushMode.MANUAL);
 		      ManagedSessionContext.bind(session);
 		 

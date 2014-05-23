@@ -32,6 +32,11 @@ public class GroupManagerImpl implements GroupManager {
 		dao.save(group);
 	}
 
+	@Override
+	public Group getGroupById(Integer id) {
+		return dao.find(id);
+	}
+
 	
 	
 

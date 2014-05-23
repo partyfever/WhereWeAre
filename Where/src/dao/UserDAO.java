@@ -1,15 +1,17 @@
 package dao;
 
 import helper.HibernateUtil;
+import model.User;
 
 import org.hibernate.Query;
-
-import model.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 /**
  * UserDAO is responsible for storing Group Objects
  */
-public class UserDAO extends GenericDAOImpl<User,Integer>{
+public class UserDAO extends GenericDAOImpl<User,Integer> implements UserDetailsService{
 
 	/**
 	 * Check if a user exists in the db with the name userName
@@ -71,6 +73,20 @@ public class UserDAO extends GenericDAOImpl<User,Integer>{
 		this.save(curUser);
 		return curUser;
 		
+	}
+
+	@Override
+	public UserDetails loadUserByUsername(String username)
+			throws UsernameNotFoundException {
+		UserDetails user=this.getUserByName(username);
+		if(user==null){
+			throw new UsernameNotFoundException("Username not found"+username);
+		}
+		return user;
+	}
+
+	public User find(Integer id) {
+		return this.load(id);
 	}
 
 }

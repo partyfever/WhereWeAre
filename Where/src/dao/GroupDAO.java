@@ -4,10 +4,9 @@ import helper.HibernateUtil;
 
 import java.util.List;
 
-import org.hibernate.Query;
-
-
 import model.Group;
+
+import org.hibernate.Query;
 
 /**
  * GroupDAO is responsible for storing Group Objects
@@ -33,5 +32,9 @@ public class GroupDAO extends GenericDAOImpl<Group,Integer>{
 				" from Group u where  u.name=:name");
 		query.setString("name", name);
 		return super.findOne(query);
+	}
+
+	public Group find(Integer id) {
+		return this.load(id);
 	}
 }

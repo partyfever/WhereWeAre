@@ -1,5 +1,7 @@
 package manager;
 
+import java.util.List;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
@@ -38,6 +40,16 @@ public class UserManagerImpl implements UserManager {
 			return user;
 		}
 		return null;
+	}
+
+	@Override
+	public List<User> getUsers() {
+		return this.userDAO.findAll(User.class);
+	}
+
+	@Override
+	public User find(Integer id) {
+	return this.userDAO.find(id);
 	}
 
 }
