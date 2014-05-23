@@ -32,7 +32,7 @@ import transfer.UserTransfer;
 import dao.UserDAO;
 
 /**
- * UserResource
+ * AuthenticationResource for obtaining an API token
  * 
  * @author Sebastian
  * 
@@ -66,18 +66,13 @@ public class AuthenticationResource {
 			throw new JsonWebApplicationException(401, Error.UNAUTHORIZED);
 		}
 		User userDetails = (User) principal;
-
 		return new UserTransfer(userDetails.getUsername(),
 				userDetails.getRoles());
 	}
-	
+
 	/**
 	 * Authenticates a user and creates an authentication token.
 	 * 
-	 * @param username
-	 *            The name of the user.
-	 * @param password
-	 *            The password of the user.
 	 * @return A transfer containing the authentication token.
 	 */
 
@@ -94,12 +89,11 @@ public class AuthenticationResource {
 		 * Reload user as password of authentication principal will be null
 		 * after authorization and password is needed for token generation
 		 */
-		UserDetails userDetails = this.userService.loadUserByUsername(user.getName());
+		UserDetails userDetails = this.userService.loadUserByUsername(user
+				.getName());
 		String token = TokenUtils.createToken(userDetails);
 		long expires = TokenUtils.expireDate(token, userDetails);
 		return new TokenTransfer(token, expires);
 	}
-
-
 
 }

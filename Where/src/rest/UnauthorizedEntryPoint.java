@@ -26,7 +26,7 @@ public class UnauthorizedEntryPoint implements AuthenticationEntryPoint {
 		if(urlParts.length==0)
 			response.sendError(401);
 		else {
-			url = urlParts[0] + "/rest/user/unauthorized";
+			url = urlParts[0] + "/rest/users/unauthorized";
 			response.sendRedirect(url);
 		}
 		

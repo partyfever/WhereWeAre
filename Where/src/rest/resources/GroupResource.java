@@ -38,7 +38,7 @@ import rest.exceptions.JsonWebApplicationException;
 import eli.JsonViews;
 
 /**
- * UserResource
+ * GroupResource
  * 
  * @author Sebastian
  * 
@@ -73,13 +73,14 @@ public class GroupResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("{id}/users")
 	@JsonView({ JsonViews.User.class })
-	public List<User> readUsers(@PathParam("id") Integer id){
+	public List<User> readUsers(@PathParam("id") Integer id) {
 		Group groupEntry = this.groupManager.getGroupById(id);
 		if (groupEntry == null) {
-			throw new JsonWebApplicationException(404,Error.RESSOURCE_NOT_FOUND);
+			throw new JsonWebApplicationException(404,
+					Error.RESSOURCE_NOT_FOUND);
 		}
-		List<User> users=groupEntry.getUsers();
-		for(User user:users){
+		List<User> users = groupEntry.getUsers();
+		for (User user : users) {
 			UriHelper.addUserLinks(uriInfo, user);
 		}
 		return users;
@@ -95,12 +96,12 @@ public class GroupResource {
 		try {
 			id = Integer.parseInt(path);
 		} catch (Exception e) {
-
 		}
 		if (id != null) {
 			Group groupEntry = this.groupManager.getGroupById(id);
 			if (groupEntry == null) {
-				throw new JsonWebApplicationException(404,Error.RESSOURCE_NOT_FOUND);
+				throw new JsonWebApplicationException(404,
+						Error.RESSOURCE_NOT_FOUND);
 			}
 			viewWriter = this.mapper.writerWithView(JsonViews.NoDetail.class);
 			UriHelper.addGroupLinks(uriInfo, groupEntry);
@@ -122,7 +123,6 @@ public class GroupResource {
 					rest.exceptions.Error.WRONG_FORM_PARAMS,
 					"name and/or color not provided");
 		}
-	
 		this.groupManager.createGroup(group);
 		UriHelper.addGroupLinks(uriInfo, group);
 		return group;
@@ -140,13 +140,13 @@ public class GroupResource {
 					rest.exceptions.Error.WRONG_FORM_PARAMS,
 					"name and/or color not provided");
 		}
-		
-		if(id==null||(group.getId()!=0&&id!=group.getId())){
+
+		if (id == null || (group.getId() != 0 && id != group.getId())) {
 			throw new JsonWebApplicationException(400,
 					rest.exceptions.Error.WRONG_RESSOURCE,
 					"name and/or color not provided");
 		}
-		if(group.getId()==0){
+		if (group.getId() == 0) {
 			group.setId(id);
 		}
 

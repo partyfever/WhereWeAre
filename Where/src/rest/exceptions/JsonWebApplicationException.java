@@ -7,24 +7,27 @@ import javax.ws.rs.core.Response;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 
-
-
-
+/**
+ * JsonWebApplicationException adds a JSONObject to the response body
+ * @author Sebastian
+ *
+ */
 public class JsonWebApplicationException extends WebApplicationException {
 
-	public JsonWebApplicationException(int status,int errorCode, String message) {
-		super(Response.status(status)
-				.entity(getErrorJson(errorCode, message))
+	public JsonWebApplicationException(int status, int errorCode, String message) {
+		super(Response.status(status).entity(getErrorJson(errorCode, message))
 				.type(MediaType.APPLICATION_JSON).build());
 
 	}
 
-	public JsonWebApplicationException(int status,Error error) {
-		this(status,error.getCode(), error.getDescription());
+	public JsonWebApplicationException(int status, Error error) {
+		this(status, error.getCode(), error.getDescription());
 	}
 
-	public JsonWebApplicationException(int status,Error error, String additionalMessage) {
-		this(status,error.getCode(), error.getDescription() + "\n" + additionalMessage);
+	public JsonWebApplicationException(int status, Error error,
+			String additionalMessage) {
+		this(status, error.getCode(), error.getDescription() + "\n"
+				+ additionalMessage);
 	}
 
 	private static JSONObject getErrorJson(int errorCode, String message) {
