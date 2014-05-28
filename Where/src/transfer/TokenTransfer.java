@@ -6,9 +6,10 @@ public class TokenTransfer {
 
 	private final String token;
 	private final long expireDate;
-
-	public TokenTransfer(String token, long expireDate) {
-
+	private final int id;
+	
+	public TokenTransfer(int id,String token, long expireDate) {
+		this.id=id;
 		this.token = token;
 		this.expireDate=expireDate;
 	}
@@ -23,5 +24,14 @@ public class TokenTransfer {
 	public long getExpireDate() {
 		return expireDate;
 	}
+
+
+	public int getId() {
+		return id;
+	}
+	
+	
+	
+	
 
 }

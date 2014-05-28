@@ -93,7 +93,8 @@ public class AuthenticationResource {
 				.getName());
 		String token = TokenUtils.createToken(userDetails);
 		long expires = TokenUtils.expireDate(token, userDetails);
-		return new TokenTransfer(token, expires);
+		User authUser=(User)userDetails;
+		return new TokenTransfer(authUser.getId(),token, expires);
 	}
 
 }
