@@ -31,7 +31,9 @@ public class ThrowableExceptionMapper implements ExceptionMapper<Throwable> {
 
 	@Override
 	public Response toResponse(Throwable t) {
+
 	t.printStackTrace();
+
 		if (t instanceof JsonWebApplicationException) {
 			return ((JsonWebApplicationException) t).getResponse();
 		} else if (t instanceof WebApplicationException) {

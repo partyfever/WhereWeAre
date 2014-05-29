@@ -7,6 +7,7 @@ import javax.faces.bean.SessionScoped;
 
 import model.User;
 
+
 import org.hibernate.ObjectNotFoundException;
 
 import dao.UserDAO;
@@ -59,7 +60,6 @@ public class UserManagerImpl implements UserManager {
 			
 		}
 		return null;
-	
-	}
+}
 
 }

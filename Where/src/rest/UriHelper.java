@@ -57,7 +57,7 @@ public class UriHelper {
 		builder=builder.path(GroupResource.class);
 		builder.path(GroupResource.class, "readUsers");
 		group.getLinks().add(
-				new AtomLink("users", builder.build(group.getId()).toString()));
+				new AtomLink("self", builder.build(group.getId()).toString()));
 	
 		return group;
 	}

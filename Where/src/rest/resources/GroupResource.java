@@ -33,6 +33,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import rest.UriHelper;
+
 import rest.exceptions.Error;
 import rest.exceptions.JsonWebApplicationException;
 import eli.JsonViews;
@@ -147,6 +148,7 @@ public class GroupResource {
 					"name and/or color not provided");
 		}
 		if (group.getId() == 0) {
+
 			group.setId(id);
 		}
 

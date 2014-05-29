@@ -7,11 +7,6 @@ import javax.ws.rs.core.Response;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 
-/**
- * JsonWebApplicationException adds a JSONObject to the response body
- * @author Sebastian
- *
- */
 public class JsonWebApplicationException extends WebApplicationException {
 
 	public JsonWebApplicationException(int status, int errorCode, String message) {
