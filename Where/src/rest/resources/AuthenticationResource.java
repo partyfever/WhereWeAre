@@ -32,6 +32,7 @@ import transfer.UserTransfer;
 import dao.UserDAO;
 
 /**
+
  * AuthenticationResource for obtaining an API token
  * 
  * @author Sebastian
@@ -96,5 +97,6 @@ public class AuthenticationResource {
 		User authUser=(User)userDetails;
 		return new TokenTransfer(authUser.getId(),token, expires);
 	}
+
 
 }

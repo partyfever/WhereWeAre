@@ -3,6 +3,7 @@ package model;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
+
 @XmlRootElement(name = "link", namespace = "http://www.w3.org/2005/Atom")
 public class AtomLink {
 	public @XmlAttribute
@@ -25,3 +26,4 @@ public class AtomLink {
 		this(rel, href, "application/json");
 	}
 }
+

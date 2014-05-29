@@ -88,6 +88,7 @@ public class UserResource {
 	public User getUser(@PathParam("id") Integer id) {
 		User user = this.userManager.find(id);
 		if (user == null) {
+
 			throw new JsonWebApplicationException(404,Error.RESSOURCE_NOT_FOUND);
 		}
 		return UriHelper.addUserLinks(uriInfo, user);
@@ -145,6 +146,7 @@ public class UserResource {
 		User authUser = SecurityHelper.getUser();
 		if (authUser.getId() != id) {
 			throw new JsonWebApplicationException(401, Error.UNAUTHORIZED,
+
 					"Cannot change location of different user.");
 		}
 		User dbUser = this.userManager.find(id);
