@@ -3,6 +3,7 @@ package controller;
 import helper.FacesUtils;
 
 import java.io.Serializable;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -13,6 +14,10 @@ import manager.GroupManager;
 import manager.UserManager;
 import model.Group;
 import model.User;
+
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+import security.SaltedSHA256PasswordEncoder;
 
 import com.icesoft.faces.context.effects.JavascriptContext;
 
@@ -25,7 +30,8 @@ public class RegisterController implements Serializable {
 
 	private final GroupManager groupManager = FacesUtils.getGroupManager();
 	private static final long serialVersionUID = 6735137016352950088L;
-
+	
+	private PasswordEncoder passwordEncoder;
 	private String selectedItem;
 	private User user = new User();
 	private String userName;
@@ -38,6 +44,11 @@ public class RegisterController implements Serializable {
 	 * Init view with available groups
 	 */
 	public RegisterController() {
+		try {
+			this.passwordEncoder=new SaltedSHA256PasswordEncoder("secret");
+		} catch (NoSuchAlgorithmException e) {
+			
+		}
 		groups = groupManager.getGroups();
 	}
 
@@ -63,12 +74,13 @@ public class RegisterController implements Serializable {
 				final Group group = groupManager
 						.getGroupByName(this.selectedItem);
 				user.setName(this.userName);
-				user.setPassword(this.password);
+				user.setPassword(this.passwordEncoder.encode(password));
+				user.addRole("user");
 				user.setGroup(group);
 				um.addUser(user);
 				final SecurityController sc = FacesUtils
 						.getSecurityController();
-				sc.logInUser(this.userName, password);
+				sc.logInUser(this.userName, user.getPassword());
 				FacesUtils.getMapViewController().updateUser(sc.getCurUser());
 				//Hide dialog
 				JavascriptContext.addJavascriptCall(
