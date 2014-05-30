@@ -15,7 +15,7 @@ import org.apache.log4j.Logger;
 
 import rest.exceptions.Error;
 import rest.exceptions.JsonWebApplicationException;
-import transfer.TextWebApplicationException;
+
 
 /**
  * This class is responsible for catching all different kind of exceptions and transform 
