@@ -136,8 +136,6 @@ public class UserResource {
 	@Path("{id}")
 	@JsonView({ JsonViews.NoDetail.class })
 	public User update(@PathParam("id") Integer id, User user) {
-	
-
 		if (id == null || (user.getId() != 0 && id != user.getId())) {
 			throw new JsonWebApplicationException(400,
 					rest.exceptions.Error.WRONG_RESSOURCE,
