@@ -120,7 +120,7 @@ public class UserResource {
 		group.setId(userEntry.getGroupId());
 		userEntry.setGroup(group);
 		this.userManager.addUser(userEntry);
-		return userEntry;
+		return UriHelper.addUserLinks(uriInfo, userEntry);
 	}
 
 	@GET
@@ -153,7 +153,7 @@ public class UserResource {
 		dbUser.setLat(user.getLat());
 		dbUser.setLng(user.getLng());
 		this.userManager.addUser(dbUser);
-		return user;
+		return UriHelper.addUserLinks(uriInfo, user);
 	}
 
 }
