@@ -3,7 +3,11 @@ package model;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
-
+/**
+ * Link which represents the HATEOAS structure
+ * @author Sebastian
+ *
+ */
 @XmlRootElement(name = "link", namespace = "http://www.w3.org/2005/Atom")
 public class AtomLink {
 	public @XmlAttribute

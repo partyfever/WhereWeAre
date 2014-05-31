@@ -1,7 +1,13 @@
 package transfer;
 
 
-
+/**
+ * Transfer the user token belonging to a user together
+ * with the expiration date. 
+ * 
+ * @author Sebastian
+ *
+ */
 public class TokenTransfer {
 
 	private final String token;

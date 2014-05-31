@@ -1,7 +1,9 @@
 package transfer;
 
 import java.util.Set;
-
+/*
+ * Transfer name and roles of a user based on a token
+ */
 
 public class UserTransfer {
 

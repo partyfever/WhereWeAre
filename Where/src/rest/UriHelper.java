@@ -9,6 +9,11 @@ import model.User;
 import rest.resources.GroupResource;
 import rest.resources.UserResource;
 
+/**
+ * Helper class for generating HATEOAS links
+ * @author Sebastian
+ *
+ */
 public class UriHelper {
 
 	/**

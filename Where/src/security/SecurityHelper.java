@@ -8,7 +8,11 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import rest.exceptions.Error;
 import rest.exceptions.JsonWebApplicationException;
 
-
+/**
+ * Helper for getting the current authenticated user 
+ * based on the provided auth token
+ *
+ */
 public class SecurityHelper {
 
 	public static User getUser(){

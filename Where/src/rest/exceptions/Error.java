@@ -1,5 +1,10 @@
 package rest.exceptions;
 
+/**
+ * Enum containing error codes for json error messages
+
+ *
+ */
 public enum Error {
 	WEB_SERVICE_GENERAL(0, "Folgender Fehler ist beim Aufruf entstanden:"), 
 	DATABASE(

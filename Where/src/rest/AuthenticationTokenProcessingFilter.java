@@ -17,6 +17,11 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.web.filter.GenericFilterBean;
 
+/**
+ * Filter which processe an provided token and handels authentication
+ *
+ *
+ */
 public class AuthenticationTokenProcessingFilter extends GenericFilterBean {
 
 	private final UserDetailsService userService;

@@ -38,8 +38,6 @@ import eli.JsonViews;
 /**
  * UserResource
  * 
- * @author Sebastian
- * 
  */
 @Component
 @Path("/users")
@@ -60,7 +58,7 @@ public class UserResource {
 	UriInfo uriInfo;
 
 	/**
-	 * Get all Users
+	 * Get all Users GET /rest/users
 	 * 
 	 * @return
 	 */
@@ -76,7 +74,7 @@ public class UserResource {
 	}
 
 	/**
-	 * Get single user by id
+	 * Get single user by id GET /users/{id}
 	 * 
 	 * @param id
 	 * @return
@@ -89,18 +87,26 @@ public class UserResource {
 		User user = this.userManager.find(id);
 		if (user == null) {
 
-			throw new JsonWebApplicationException(404,Error.RESSOURCE_NOT_FOUND);
+			throw new JsonWebApplicationException(404,
+					Error.RESSOURCE_NOT_FOUND);
 		}
 		return UriHelper.addUserLinks(uriInfo, user);
 	}
 
+	/**
+	 * Create a user POST /users
+	 * 
+	 * @param userEntry
+	 * @return
+	 */
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	@JsonView({ JsonViews.User.class })
 	public User create(User userEntry) {
 		// Check all params are submitted
-		if (UriHelper.isNullOrEmpty(userEntry.getName())||userEntry.getGroupId()==0
+		if (UriHelper.isNullOrEmpty(userEntry.getName())
+				|| userEntry.getGroupId() == 0
 				|| UriHelper.isNullOrEmpty(userEntry.getPassword())) {
 			throw new JsonWebApplicationException(400,
 					rest.exceptions.Error.WRONG_FORM_PARAMS,
@@ -116,7 +122,7 @@ public class UserResource {
 		userEntry.addRole("user");
 		userEntry.setPassword(this.passwordEncoder.encode(userEntry
 				.getPassword()));
-		Group group=new Group();
+		Group group = new Group();
 		group.setId(userEntry.getGroupId());
 		userEntry.setGroup(group);
 		this.userManager.addUser(userEntry);
@@ -130,6 +136,13 @@ public class UserResource {
 		throw new JsonWebApplicationException(401, Error.UNAUTHORIZED);
 	}
 
+	/**
+	 * update lat/lng of user PUT /rest/users/{id}
+	 * 
+	 * @param id
+	 * @param user
+	 * @return
+	 */
 	@PUT
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -145,7 +158,7 @@ public class UserResource {
 		if (authUser.getId() != id) {
 			throw new JsonWebApplicationException(401, Error.UNAUTHORIZED,
 
-					"Cannot change location of different user.");
+			"Cannot change location of different user.");
 		}
 		User dbUser = this.userManager.find(id);
 		dbUser.setLat(user.getLat());

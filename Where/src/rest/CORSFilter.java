@@ -1,6 +1,10 @@
 package rest;
 
 import java.util.ArrayList;
+/**
+ * CORS Filter for handling cross domain conflicts
+ * Simply adds access-controll parameters to the http headers
+ */
 import java.util.List;
 
 import javax.ws.rs.ext.Provider;

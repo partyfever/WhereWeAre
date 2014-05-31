@@ -1,6 +1,5 @@
 package rest.resources;
 
-import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -9,8 +8,6 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriInfo;
 
-import manager.UserManager;
-import manager.UserManagerImpl;
 import model.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,10 +30,7 @@ import dao.UserDAO;
 
 /**
 
- * AuthenticationResource for obtaining an API token
- * 
- * @author Sebastian
- * 
+ * AuthenticationResource for obtaining an API token 
  */
 @Component
 @Path("/authentication")
@@ -47,7 +41,6 @@ public class AuthenticationResource {
 	@Autowired
 	private UserDAO userDao;
 
-	private UserManager userManager = new UserManagerImpl();
 	@Autowired
 	@Qualifier("authenticationManager")
 	private AuthenticationManager authManager;
@@ -56,6 +49,10 @@ public class AuthenticationResource {
 	@Context
 	UriInfo uriInfo;
 
+	/**
+	 * GET /authentication?token={token}
+	 * @return
+	 */
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public UserTransfer getUser() {
@@ -73,7 +70,7 @@ public class AuthenticationResource {
 
 	/**
 	 * Authenticates a user and creates an authentication token.
-	 * 
+	 * POST /rest/authentiation
 	 * @return A transfer containing the authentication token.
 	 */
 
@@ -85,7 +82,6 @@ public class AuthenticationResource {
 		Authentication authentication = this.authManager
 				.authenticate(authenticationToken);
 		SecurityContextHolder.getContext().setAuthentication(authentication);
-
 		/*
 		 * Reload user as password of authentication principal will be null
 		 * after authorization and password is needed for token generation

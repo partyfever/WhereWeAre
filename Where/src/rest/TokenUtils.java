@@ -6,6 +6,11 @@ import java.security.NoSuchAlgorithmException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.codec.Hex;
 
+/**
+ * Helper class for generating tokens
+ * @author Sebastian
+ *
+ */
 public class TokenUtils {
 
 	public static final String MAGIC_KEY = "obfuscate";
